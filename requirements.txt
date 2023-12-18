@@ -1,4 +1,5 @@
-opencv-python
+# picamera2
+# opencv-python
 torch
 torchvision
 torchaudio
