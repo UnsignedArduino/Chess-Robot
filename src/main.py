@@ -15,7 +15,7 @@ logger.debug("Starting camera")
 camera = Picamera2()
 config = camera.create_video_configuration(
     raw={"size": (1640, 1232)},
-    main={"size": (640, 480)},
+    main={"size": (640, 640)},
     transform=Transform(hflip=True, vflip=True),
 )
 camera.configure(config)
@@ -24,11 +24,9 @@ sleep(1)
 
 logger.debug("Starting captures")
 while True:
-    rgb_image = camera.capture_array()
+    image = cv2.cvtColor(camera.capture_array(), cv2.COLOR_RGB2BGR)
 
-    bgr_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
-
-    cv2.imshow("live", bgr_image)
+    cv2.imshow("live", image)
 
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
